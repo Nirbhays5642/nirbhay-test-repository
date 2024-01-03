@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #FFC0CB; /* Pink background color */
+      overflow: hidden;
+    }
+
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .options-container {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .option {
+      padding: 10px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      position: absolute;
+      transition: left 0.5s, top 0.5s;
+    }
+
+    .option.yes {
+      background-color: #90EE90; /* Light green background color */
+      left: -50px;
+    }
+
+    .option.no {
+      background-color: #FF69B4; /* Lighter pink background color */
+      left: 50px;
+    }
+
+    .love-symbol {
+      color: #FF0000; /* Red color */
+      font-size: 20px;
+      position: absolute;
+      animation: floatAnimation 1s infinite alternate;
+    }
+
+    @keyframes floatAnimation {
+      0% {
+        top: 0;
+      }
+      100% {
+        top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="question">Do you love me?</div>
+
+<div class="options-container">
+  <div class="option yes" onclick="showMessage('I love you too!')">Yes</div>
+  <div class="option no" onmousemove="moveOption()">No</div>
+</div>
+
+<script>
+  function showMessage(message) {
+    alert(message);
+  }
+
+  function moveOption() {
+    const option = document.querySelector('.option.no');
+    const cursorX = event.clientX - option.clientWidth * 2;
+    const cursorY = event.clientY - option.clientHeight * 2;
+
+    option.style.left = `${cursorX}px`;
+    option.style.top = `${cursorY}px`;
+  }
+
+  // Add love symbols
+  for (let i = 0; i < 20; i++) {
+    createLoveSymbol();
+  }
+
+  function createLoveSymbol() {
+    const loveSymbol = document.createElement('div');
+    loveSymbol.innerHTML = '❤';
+    loveSymbol.className = 'love-symbol';
+
+    const randomX = Math.random() * window.innerWidth;
+    const randomY = Math.random() * window.innerHeight;
+
+    loveSymbol.style.left = `${randomX}px`;
+    loveSymbol.style.top = `${randomY}px`;
+
+    document.body.appendChild(loveSymbol);
+  }
+</script>
+
+</body>
+</html>
